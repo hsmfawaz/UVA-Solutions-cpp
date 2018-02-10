@@ -20,7 +20,7 @@ void Solution() {
 		rep(i,0,sz(x))
 		{
 			x[i] = tolower(x[i]);
-			if (x[i] - 'a' >= 0 and x[i] - 'a' <= 25)
+			if (isalpha(x[i]))
 				y += x[i];
 			else if (sz(y) > 0)
 				xa.insert(y), y = "";
