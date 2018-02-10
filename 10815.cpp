@@ -13,16 +13,16 @@ typedef unsigned long long ll;
 typedef unsigned long ul;
 const int MX = 10e5 + 1;
 void Solution() {
-	string x;
+	string x, y;
 	set<string> xa;
 	while (cin >> x) {
-		string y = "";
+		y = "";
 		rep(i,0,sz(x))
 		{
 			x[i] = tolower(x[i]);
 			if (x[i] - 'a' >= 0 and x[i] - 'a' <= 25)
 				y += x[i];
-			else if ((x[i] == '-' || x[i] == '\'') and sz(y) > 0)
+			else if (sz(y) > 0)
 				xa.insert(y), y = "";
 		}
 		if (y != "")
