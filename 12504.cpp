@@ -62,31 +62,28 @@ void Solution() {
 		if (xa == xa2) {
 			cout << "No changes\n";
 		} else {
-			if (sz(add) > 0) {
-				string t = "";
-				rep(i,0,sz(add))
-					if (add[i] != "")
-						t += add[i] + ',';
-				t[sz(t) - 1] = '\n';
-				cout << (sz(t) > 0 and t != "\n" ? "+" + t : "");
-			}
-			if (sz(deleted) > 0) {
 
-				string t = "";
-				for (auto it : deleted)
-					if (it.second == 1)
-						t += it.first + ",";
-				t[sz(t) - 1] = '\n';
-				cout << (sz(t) > 0 and t != "\n" ? "-" + t : "");
-			}
-			if (sz(change) > 0) {
-				string t = "";
-				rep(i,0,sz(change))
-					if (change[i] != "")
-						t += change[i] + ',';
-				t[sz(t) - 1] = '\n';
-				cout << (sz(t) > 0 and t != "\n" ? "*" + t : "");
-			}
+			string t = "";
+			rep(i,0,sz(add))
+				if (add[i] != "")
+					t += add[i] + ',';
+			t[sz(t) - 1] = '\n';
+			cout << (sz(t) > 0 and t != "\n" ? "+" + t : "");
+
+			t = "";
+			for (auto it : deleted)
+				if (it.second == 1)
+					t += it.first + ",";
+			t[sz(t) - 1] = '\n';
+			cout << (sz(t) > 0 and t != "\n" ? "-" + t : "");
+
+			t = "";
+			rep(i,0,sz(change))
+				if (change[i] != "")
+					t += change[i] + ',';
+			t[sz(t) - 1] = '\n';
+			cout << (sz(t) > 0 and t != "\n" ? "*" + t : "");
+
 		}
 		cout << endl;
 	}
