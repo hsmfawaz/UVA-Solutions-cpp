@@ -20,20 +20,16 @@ void Solution() {
 		rep(i,0,n)
 			cin >> x[i];
 
-		for (int k = 1; k < n and !finish; k++) {
+		for (int k = 1; k <= n and !finish; k++) {
 			int mx = 0;
 			rep(i,0,k)
 				mx += x[i];
+			int i = k;
+			while (mx < s and i < n)
+				mx += x[i] - x[i - k], i++;
 
-			rep(i,k,n)
-			{
-				if (mx >= s) {
-					cout << k << endl;
-					finish = true;
-					break;
-				}
-				mx += x[i] - x[i - k];
-			}
+			if (mx >= s)
+				cout << k << endl, finish = true;
 		}
 		if (!finish)
 			cout << 0 << endl;
