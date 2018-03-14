@@ -9,8 +9,7 @@ print($name . "\n");
 $cppfile = file_get_contents('C:\Users\hp\eclipse-workspace\acm\src\acm.cpp');
 if (@file_put_contents($name,$cppfile))
 	print("File created \n");
-echo exec("git init")."\n";
 echo exec("git add -A")."\n";
 echo shell_exec("git commit -m 'Solved'")."\n";
 echo shell_exec("git push -u -f origin master")."\n";
-print('https://github.com/hsmfawaz/UVA-Solutions-cpp/blob/master/'.$name);
+print('https://github.com/hsmfawaz/UVA-Solutions-cpp/blob/master/'.$name."\n");
