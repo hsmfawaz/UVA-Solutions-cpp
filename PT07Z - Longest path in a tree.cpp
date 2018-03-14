@@ -16,22 +16,26 @@ typedef unsigned long ul;
 const int oo = 10e3 + 1;
 vector<vi> g(oo);
 bool vis[oo];
-int rets = 0;
-int dfs(int node) {
-	int m = -1, m1 = -1, m2 = -1;
-	vis[node] = true;
+
+pair<int, int> dfs(int node, int parent) {
+	int diam = 0;
+	int mxheights[3];
+	clr(mxheights, -1);
+
 	for (int it : g[node]) {
-		if (!vis[it]) {
-			m = dfs(it);
-			if (m >= m1)
-				m2 = m1, m1 = m;
-			else if (m > m2)
-				m2 = m;
+		if (it != parent) {
+			pair<int, int> p = dfs(it, node);
+			diam = max(diam, p.ft);
+
+			mxheights[0] = p.sd + 1;
+			sort(mxheights, mxheights + 3);
 		}
 	}
+	rep(i,0,3)
+		mxheights[i] += mxheights[i] == -1 ? 1 : 0;
 
-	rets = max(rets, ++m1 + ++m2);
-	return m1;
+	diam = max(diam, mxheights[1] + mxheights[2]);
+	return {diam,mxheights[2]};
 }
 void solution() {
 	int n, t, x;
@@ -39,8 +43,7 @@ void solution() {
 	g.resize(n);
 	rep(i,0,n-1)
 		cin >> t >> x, g[t].pb(x), g[x].pb(t);
-	dfs(1);
-	cout << rets;
+	cout << dfs(1, 0).ft;
 
 }
 int main() {
