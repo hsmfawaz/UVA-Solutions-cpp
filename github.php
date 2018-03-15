@@ -1,10 +1,9 @@
 <?php
 print("Problem Name => ");
-fscanf(STDIN, "%s\n", $name);
-$bad = array_merge(
-    array_map('chr', range(0, 31)),
-    array("<", ">", ":", '"', "/", "\\", "|", "?", "*"));
-$name = str_replace($bad, "", $name) . ".cpp";
+$name = fgets(STDIN);
+preg_match('/[0-9]+/', $name, $num);
+preg_match('/[a-zA-Z]+\s?[a-zA-Z]+/', $name, $names);
+$name = $num[0].' - '.$names[0].".cpp";
 print($name . "\n");
 $cppfile = file_get_contents('C:\Users\hp\eclipse-workspace\acm\src\acm.cpp');
 if (@file_put_contents($name,$cppfile))
