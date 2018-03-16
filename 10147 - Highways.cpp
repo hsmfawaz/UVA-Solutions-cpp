@@ -18,9 +18,9 @@ typedef unsigned long ul;
 const int oo = 751, OO = 10e8;
 struct edge {
 	int from, to;
-	double weight;
+	int weight;
 	bool del;
-	edge(int f, int t, double c, bool d = false) {
+	edge(int f, int t, int c, bool d = false) {
 		from = f, to = t, weight = c;
 		del = d;
 	}
@@ -41,7 +41,7 @@ struct UnionFind {
 			parent[i] = i, rank[i] = 1;
 		clr(vis, 0);
 	}
-	void addEdge(int x, int y, double cost, bool ds = false) {
+	void addEdge(int x, int y, int cost, bool ds = false) {
 		edges.pb(edge(x, y, cost, ds));
 	}
 	int find_set(int x) {
@@ -93,9 +93,9 @@ struct UnionFind {
 
 int n, m;
 pair<int, int> cord[oo];
-double Dist(int i, int j) {
+int Dist(int i, int j) {
 	int x = cord[i].ft - cord[j].ft, y = cord[i].sd - cord[j].sd;
-	return sqrt(x * x + y * y);
+	return x * x + y * y;
 }
 bool cmp(edge a, edge b) {
 	return a.from < b.from;
