@@ -17,18 +17,8 @@ typedef vector<ii> vii;
 typedef unsigned long ul;
 const int oo = 2e6 + 5, OO = 10e8;
 int t, n;
-struct edge {
-	int from, to, weight;
-	edge(int f, int t, int c) {
-		from = f, to = t, weight = c;
-	}
-	bool operator <(const edge &e) const {
-		return weight > e.weight;
-	}
-};
 struct UnionFind {
 	vector<int> rank, parent;
-	vector<edge> edges;
 	int number;
 	UnionFind(int n) {
 		number = n;
@@ -36,9 +26,7 @@ struct UnionFind {
 		for (int i = 0; i < n; i++)
 			parent[i] = i, rank[i] = 1;
 	}
-	void addEdge(int x, int y, int cost) {
-		edges.pb(edge(x, y, cost));
-	}
+
 	int find_set(int x) {
 		if (x == parent[x])
 			return x;
