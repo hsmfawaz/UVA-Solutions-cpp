@@ -18,46 +18,11 @@ struct Point {
 		printf("%.9lf %.9lf", x, y);
 	}
 
-	//operators
-	Point& operator=(const Point& o) {
-		x = o.x;
-		y = o.y;
-		return *this;
-	}
-
-	Point& operator+=(const Point& o) {
-		x += o.x;
-		y += o.y;
-		return *this;
-	}
-
-	Point& operator-=(const Point& o) {
-		x -= o.x;
-		y -= o.y;
-		return *this;
-	}
-
-	Point& operator*=(double fact) {
-		x -= fact;
-		y -= fact;
-		return *this;
-	}
-	Point& operator/=(double fact) {
-		x /= fact;
-		y /= fact;
-		return *this;
-	}
 };
 
 Point any;
 
 //------------------------operators---------------------------
-//minus
-Point operator-(const Point &a) {
-	return Point(-a.x, -a.y);
-}
-
-
 //addition
 Point operator+(const Point &a, const Point &b) {
 	return Point(a.x + b.x, a.y + b.y);
@@ -66,36 +31,6 @@ Point operator+(const Point &a, const Point &b) {
 Point operator-(const Point &a, const Point &b) {
 	return Point(a.x - b.x, a.y - b.y);
 }
-
-//dot product
-double operator*(const Point &a, const Point &b) {
-	return a.x * b.x + a.y * b.y;
-}
-
-//cross product
-double operator^(const Point &a, const Point &b) {
-	return a.x * b.y - a.y * b.x;
-}
-
-//multiplication by a factor
-Point operator*(const double factor, const Point & p) {
-	return Point(factor * p.x, factor * p.y);
-}
-
-
-Point operator*(const Point & p, const double factor) {
-	return Point(factor * p.x, factor * p.y);
-}
-
-//comparisons
-bool operator==(const Point & a, const Point & b) {
-	return a.x == b.x && a.y == b.y;
-}
-
-bool operator!=(const Point & a, const Point & b) {
-	return a.x != b.x || a.y != b.y;
-}
-
 
 //---------------------functions----------------------
 Point rotate(const Point &p, double an) {
