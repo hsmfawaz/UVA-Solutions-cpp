@@ -198,13 +198,25 @@ bool onsegment(const Segment& r, const Point& p) {
 }
 
 
-
-double dist(const Segment& r, const Point& p) {
-	if ((p - r.a) * (r.ab) <= 0)return norm(p - r.a);
-	if ((p - r.b()) * (-r.ab) <= 0)return norm(p - r.b());
-
-	return abs(((p - r.a)^r.ab) / norm(r.ab));
+void  proj(const Point &p, const Segment &l, Point &res){
+    res = l.a;
+    res += l.ab *  ( ((p - l.a) * l.ab) / abs(l.ab) );
 }
+
+double dist(const Segment& r, const Point& p, Point &res = any){
+	if((p - r.a) * (r.ab) <= 0) {
+		res = r.a;
+		return norm(p - r.a);
+	}
+	if((p - r.b()) * (-r.ab) <= 0) {
+		res =  r.b();
+		return norm(p - r.b());
+	}
+
+	proj(p, r, res);
+    return abs(((p-r.a)^r.ab)/norm(r.ab));
+}
+
 
 
 
@@ -212,13 +224,8 @@ bool bet(const Segment &s1, const Segment &s2, const Point &p) {
 	return (dist(s1, p) + dist(s2, p) == dist(s2, s1.a));
 }
 
-Point coord(const Segment& r, const Point& p) {
-	Point res;
-	if ((p - r.a) * (r.ab) < 0) res = r.a;     // If the point out of the segment
-	else if ((p - r.b()) * (-r.ab) < 0) res = r.b(); // If the point out of the segment on the other side
-	else res = r.a + (r.ab *  ( ((p - r.a) * r.ab) / abs(r.ab) ));
-	return res;
-}
+
+
 
 int main() {
 	ios_base::sync_with_stdio(0); cin.tie(0); //cout.tie(0);
@@ -228,12 +235,12 @@ int main() {
 		p[0].read();
 		int idx = 0;
 		double mn = 10e9;
-		for (int i = 1; i <= n;idx = i, ++i) {
+		for (int i = 1; i <= n; idx = i, ++i) {
 			p[i].read();
 			Segment s(p[idx], p[i]);
 			double dst = dist(s, M);
 			if ( dst < mn)
-				mn = dst, Res = coord(s, M);
+				mn = dst, Res = any;
 		}
 		Res.print();
 	}
